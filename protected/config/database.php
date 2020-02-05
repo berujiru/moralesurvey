@@ -7,7 +7,7 @@ return array(
 	
 	'connectionString' => 'mysql:host=localhost;dbname=dostmorale',
 	'emulatePrepare' => true,
-	'username' => 'eulims',
-	'password' => 'eulims',
+	'username' => '',
+	'password' => '',
 	'charset' => 'utf8',
 );
