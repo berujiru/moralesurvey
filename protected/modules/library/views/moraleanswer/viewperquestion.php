@@ -10,6 +10,7 @@
 
 $msid = $moralesurvey->id;
 
+
 $this->widget('ext.groupgridview.GroupGridView', array(
 	//'id'=>'scholar-grid',
 	//'enableHistory'=>true,
@@ -40,7 +41,16 @@ $this->widget('ext.groupgridview.GroupGridView', array(
 				//'value'=>Moraleanswer::model()->getAnswer($this->data->id,'DN'),
 				'value'=>function($data,$datacolumn) use($msid){
 				 	// echo Moraleanswer::model()->getAnswer($data->id,'DN',$msid);
-				 	$num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'DN','survey_id'=>$msid,'question'=>$data->id));
+				 	//$num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'DN','survey_id'=>$msid,'question'=>$data->id));
+
+				 	$num = Yii::app()->db->createCommand()
+				    ->from('Moraleanswer a')
+				    ->join('moraleconfig c', 'a.user_id=c.user_id')
+				    ->where('c.status=1 and a.answer="DN" and a.survey_id='.$msid.' and question='.$data->id)
+				    ->queryAll();
+
+
+
 					//print_r($num); exit();
 					$num = count($num);
 					return $num;
@@ -53,7 +63,14 @@ $this->widget('ext.groupgridview.GroupGridView', array(
 				'header'=>'N',
 				'value'=>function($data,$datacolumn) use($msid){
 				 	// echo Moraleanswer::model()->getAnswer($data->id,'N',$msid);
-				 	$num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'N','survey_id'=>$msid,'question'=>$data->id));
+				 	// $num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'N','survey_id'=>$msid,'question'=>$data->id));
+
+				 	$num = Yii::app()->db->createCommand()
+				    ->from('Moraleanswer a')
+				    ->join('moraleconfig c', 'a.user_id=c.user_id')
+				    ->where('c.status=1 and a.answer="N" and a.survey_id='.$msid.' and question='.$data->id)
+				    ->queryAll();
+
 					//print_r($num); exit();
 					$num = count($num);
 					return $num;
@@ -66,8 +83,16 @@ $this->widget('ext.groupgridview.GroupGridView', array(
 				'header'=>'NS',
 				'value'=>function($data,$datacolumn) use($msid){
 				 	// echo Moraleanswer::model()->getAnswer($data->id,'NS',$msid);
-				 	$num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'NS','survey_id'=>$msid,'question'=>$data->id));
+				 	// $num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'NS','survey_id'=>$msid,'question'=>$data->id));
 					//print_r($num); exit();
+
+					$num = Yii::app()->db->createCommand()
+				    ->from('Moraleanswer a')
+				    ->join('moraleconfig c', 'a.user_id=c.user_id')
+				    ->where('c.status=1 and a.answer="NS" and a.survey_id='.$msid.' and question='.$data->id)
+				    ->queryAll();
+
+
 					$num = count($num);
 					return $num;
 				 },
@@ -79,7 +104,15 @@ $this->widget('ext.groupgridview.GroupGridView', array(
 				'header'=>'Y',
 				'value'=>function($data,$datacolumn) use($msid){
 				 	// echo Moraleanswer::model()->getAnswer($data->id,'Y',$msid);
-				 	$num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'Y','survey_id'=>$msid,'question'=>$data->id));
+				 	// $num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'Y','survey_id'=>$msid,'question'=>$data->id));
+
+				 	$num = Yii::app()->db->createCommand()
+				    ->from('Moraleanswer a')
+				    ->join('moraleconfig c', 'a.user_id=c.user_id')
+				    ->where('c.status=1 and a.answer="Y" and a.survey_id='.$msid.' and question='.$data->id)
+				    ->queryAll();
+
+
 					//print_r($num); exit();
 					$num = count($num);
 					return $num;
@@ -92,7 +125,14 @@ $this->widget('ext.groupgridview.GroupGridView', array(
 				'header'=>'DY',
 				'value'=>function($data,$datacolumn) use($msid){
 				 	// echo Moraleanswer::model()->getAnswer($data->id,'DY',$msid);
-				 	$num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'DY','survey_id'=>$msid,'question'=>$data->id));
+				 	// $num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'DY','survey_id'=>$msid,'question'=>$data->id));
+
+				 	$num = Yii::app()->db->createCommand()
+				    ->from('Moraleanswer a')
+				    ->join('moraleconfig c', 'a.user_id=c.user_id')
+				    ->where('c.status=1 and a.answer="DY" and a.survey_id='.$msid.' and question='.$data->id)
+				    ->queryAll();
+
 					//print_r($num); exit();
 					$num = count($num);
 					return $num;
@@ -105,7 +145,15 @@ $this->widget('ext.groupgridview.GroupGridView', array(
 				'header'=>'Total',
 				'value'=>function($data,$datacolumn) use($msid){
 				 	// echo Moraleanswer::model()->getTotalanswer($data->id,$msid);
-				 	$num = Moraleanswer::model()->findAllByAttributes(array('survey_id'=>$msid,'question'=>$data->id));
+				 	// $num = Moraleanswer::model()->findAllByAttributes(array('survey_id'=>$msid,'question'=>$data->id));
+
+				 	$num = Yii::app()->db->createCommand()
+				    ->from('Moraleanswer a')
+				    ->join('moraleconfig c', 'a.user_id=c.user_id')
+				    ->where('c.status=1 and a.survey_id='.$msid.' and question='.$data->id)
+				    ->queryAll();
+
+
 					//print_r($num); exit();
 					$num = count($num);
 					return $num;
@@ -118,15 +166,53 @@ $this->widget('ext.groupgridview.GroupGridView', array(
 				'header'=>'Index',
 				'value'=>function($data,$datacolumn) use($msid){
 				 	// echo Moraleanswer::model()->getIndex($data->id,$msid);
-				 	$num = Moraleanswer::model()->findAllByAttributes(array('survey_id'=>$msid,'question'=>$data->id));
+				 	// $num = Moraleanswer::model()->findAllByAttributes(array('survey_id'=>$msid,'question'=>$data->id));
+
+				 	$num = Yii::app()->db->createCommand()
+				    ->from('Moraleanswer a')
+				    ->join('moraleconfig c', 'a.user_id=c.user_id')
+				    ->where('c.status=1 and a.survey_id='.$msid.' and question='.$data->id)
+				    ->queryAll();
+
+
 					$total = count($num)*4;
-					$num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'N','survey_id'=>$msid,'question'=>$data->id));
+					// $num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'N','survey_id'=>$msid,'question'=>$data->id));
+
+					$num = Yii::app()->db->createCommand()
+				    ->from('Moraleanswer a')
+				    ->join('moraleconfig c', 'a.user_id=c.user_id')
+				    ->where('c.status=1 and a.answer="N" and a.survey_id='.$msid.' and question='.$data->id)
+				    ->queryAll();
+
+
 					$n = count($num)*1;
-					$num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'NS','survey_id'=>$msid,'question'=>$data->id));
+					//$num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'NS','survey_id'=>$msid,'question'=>$data->id));
+
+					$num = Yii::app()->db->createCommand()
+				    ->from('Moraleanswer a')
+				    ->join('moraleconfig c', 'a.user_id=c.user_id')
+				    ->where('c.status=1 and a.answer="NS" and a.survey_id='.$msid.' and question='.$data->id)
+				    ->queryAll();
+
+
 					$ns = count($num)*2;
-					$num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'Y','survey_id'=>$msid,'question'=>$data->id));
+					//$num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'Y','survey_id'=>$msid,'question'=>$data->id));
+
+					$num = Yii::app()->db->createCommand()
+				    ->from('Moraleanswer a')
+				    ->join('moraleconfig c', 'a.user_id=c.user_id')
+				    ->where('c.status=1 and a.answer="Y" and a.survey_id='.$msid.' and question='.$data->id)
+				    ->queryAll();
+
 					$y = count($num)*3;
-					$num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'DY','survey_id'=>$msid,'question'=>$data->id));
+					// $num = Moraleanswer::model()->findAllByAttributes(array('answer'=>'DY','survey_id'=>$msid,'question'=>$data->id));
+
+					$num = Yii::app()->db->createCommand()
+				    ->from('Moraleanswer a')
+				    ->join('moraleconfig c', 'a.user_id=c.user_id')
+				    ->where('c.status=1 and a.answer="DY" and a.survey_id='.$msid.' and question='.$data->id)
+				    ->queryAll();
+
 					$dy =count($num)*4;
 					
 					if($total==0){
